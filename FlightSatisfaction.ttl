@@ -33,24 +33,11 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#hasAircraft
-:hasAircraft rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf owl:topDataProperty ;
-             rdfs:domain :Airline ;
-             rdfs:range xsd:int .
-
-
-###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#hasReviews
-:hasReviews rdf:type owl:DatatypeProperty ;
+###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#nAircrafts
+:nAircrafts rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
-            rdfs:domain :Traveller ;
-            rdfs:range xsd:int .
-
-
-###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#hasValue
-:hasValue rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf owl:topDataProperty ;
-          rdfs:range xsd:integer .
+            rdfs:domain :Airline ;
+            rdfs:range xsd:integer .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#nCompanions
@@ -58,6 +45,19 @@
              rdfs:subPropertyOf owl:topDataProperty ;
              rdfs:domain :Traveller ;
              rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#nReviews
+:nReviews rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :Traveller ;
+          rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#nValue
+:nValue rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:range xsd:integer .
 
 
 #################################################################
@@ -87,7 +87,9 @@
 :Airbus rdf:type owl:Class ;
         rdfs:subClassOf :Aircraft ;
         owl:disjointWith :Boeing ;
-        rdfs:comment "The Airbus class represents a category of aircraft manufactured Airbus company." ;
+        rdfs:comment """The Airbus class represents a category of aircraft manufactured Airbus company.
+
+Same as https://es.dbpedia.org/page/Airbus""" ;
         rdfs:label "Airbus" .
 
 
@@ -205,33 +207,34 @@
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#Avion1
 :Avion1 rdf:type owl:NamedIndividual ,
-                 :A330 .
+                 :A330 ;
+        rdfs:comment "Example of Airbus Aircraft" .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#Avion2
 :Avion2 rdf:type owl:NamedIndividual ,
-                 <http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#737-800> .
+                 <http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#737-800> ;
+        rdfs:comment "Example of Boeing Aircraft" .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#Avion3
 :Avion3 rdf:type owl:NamedIndividual ,
-                 :A380 .
+                 :A380 ;
+        rdfs:comment "Example of Airbus Aircraft" .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#BadRating
 :BadRating rdf:type owl:NamedIndividual ,
                     :Rating ;
-           :hasValue 1 .
-
-
-###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#Body
-:Body rdf:type owl:NamedIndividual .
+           :nValue 1 ;
+           rdfs:comment "Instance created to show Bad class inference." .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#GoodRating
 :GoodRating rdf:type owl:NamedIndividual ,
                      :Rating ;
-            :hasValue 5 .
+            :nValue 5 ;
+            rdfs:comment "Instance created to show Good class inference." .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#QatarAirways
@@ -239,26 +242,45 @@
                        :Airline ;
               :Owns :Avion2 ,
                     :Avion3 ;
-              :hasAircraft 2 .
+              :nAircrafts 2 ;
+              rdfs:comment """Airline instance QatarAirways
+
+Same as https://dbpedia.org/page/Qatar_Airways""" ;
+              rdfs:label "QatarAirways" .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#Review1
 :Review1 rdf:type owl:NamedIndividual ,
                   :Review ;
-         :hasValue 1 .
+         :nValue 1 ;
+         rdfs:comment "Review instance" .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#Ryanair
 :Ryanair rdf:type owl:NamedIndividual ,
                   :Airline ;
          :Owns :Avion1 ;
-         :hasAircraft 1 .
+         :nAircrafts 1 ;
+         rdfs:comment """Airline instance Ryanair
+
+Same as https://dbpedia.org/page/Ryanair""" ;
+         rdfs:label "Ryanair" .
+
+
+###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#TravellerCouple
+:TravellerCouple rdf:type owl:NamedIndividual ,
+                          :Traveller ;
+                 :nCompanions 1 ;
+                 :nReviews 1 ;
+                 rdfs:comment "Traveller example to show Couple inference" .
 
 
 ###  http://www.semanticweb.org/borja/ontologies/2024/3/FlightSatisfaction#TravellerSolo
 :TravellerSolo rdf:type owl:NamedIndividual ,
                         :Traveller ;
-               :nCompanions 0 .
+               :nCompanions 0 ;
+               :nReviews 2 ;
+               rdfs:comment "Traveller example to show Solo inference" .
 
 
 #################################################################
@@ -300,21 +322,21 @@
                            swrl:argument1 <urn:swrl:var#r>
                          ] ;
                rdf:rest [ rdf:type swrl:AtomList ;
-                          rdf:first [ rdf:type swrl:BuiltinAtom ;
-                                      swrl:builtin swrlb:lessThan ;
-                                      swrl:arguments [ rdf:type rdf:List ;
-                                                       rdf:first <urn:swrl:var#v> ;
-                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                  rdf:first 2 ;
-                                                                  rdf:rest rdf:nil
-                                                                ]
-                                                     ]
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate :nValue ;
+                                      swrl:argument1 <urn:swrl:var#r> ;
+                                      swrl:argument2 <urn:swrl:var#v>
                                     ] ;
                           rdf:rest [ rdf:type swrl:AtomList ;
-                                     rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
-                                                 swrl:propertyPredicate :hasValue ;
-                                                 swrl:argument1 <urn:swrl:var#r> ;
-                                                 swrl:argument2 <urn:swrl:var#v>
+                                     rdf:first [ rdf:type swrl:BuiltinAtom ;
+                                                 swrl:builtin swrlb:lessThan ;
+                                                 swrl:arguments [ rdf:type rdf:List ;
+                                                                  rdf:first <urn:swrl:var#v> ;
+                                                                  rdf:rest [ rdf:type rdf:List ;
+                                                                             rdf:first 2 ;
+                                                                             rdf:rest rdf:nil
+                                                                           ]
+                                                                ]
                                                ] ;
                                      rdf:rest rdf:nil
                                    ]
@@ -324,6 +346,42 @@
                rdf:first [ rdf:type swrl:ClassAtom ;
                            swrl:classPredicate :Bad ;
                            swrl:argument1 <urn:swrl:var#r>
+                         ] ;
+               rdf:rest rdf:nil
+             ]
+ ] .
+
+[ rdf:type swrl:Imp ;
+   swrl:body [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:BuiltinAtom ;
+                           swrl:builtin swrlb:greaterThan ;
+                           swrl:arguments [ rdf:type rdf:List ;
+                                            rdf:first <urn:swrl:var#c> ;
+                                            rdf:rest [ rdf:type rdf:List ;
+                                                       rdf:first 0 ;
+                                                       rdf:rest rdf:nil
+                                                     ]
+                                          ]
+                         ] ;
+               rdf:rest [ rdf:type swrl:AtomList ;
+                          rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
+                                      swrl:propertyPredicate :nCompanions ;
+                                      swrl:argument1 <urn:swrl:var#t> ;
+                                      swrl:argument2 <urn:swrl:var#c>
+                                    ] ;
+                          rdf:rest [ rdf:type swrl:AtomList ;
+                                     rdf:first [ rdf:type swrl:ClassAtom ;
+                                                 swrl:classPredicate :Traveller ;
+                                                 swrl:argument1 <urn:swrl:var#t>
+                                               ] ;
+                                     rdf:rest rdf:nil
+                                   ]
+                        ]
+             ] ;
+   swrl:head [ rdf:type swrl:AtomList ;
+               rdf:first [ rdf:type swrl:ClassAtom ;
+                           swrl:classPredicate :Couple ;
+                           swrl:argument1 <urn:swrl:var#t>
                          ] ;
                rdf:rest rdf:nil
              ]
@@ -384,7 +442,7 @@
                                     ] ;
                           rdf:rest [ rdf:type swrl:AtomList ;
                                      rdf:first [ rdf:type swrl:DatavaluedPropertyAtom ;
-                                                 swrl:propertyPredicate :hasValue ;
+                                                 swrl:propertyPredicate :nValue ;
                                                  swrl:argument1 <urn:swrl:var#r> ;
                                                  swrl:argument2 <urn:swrl:var#v>
                                                ] ;
